@@ -33,4 +33,16 @@
             <td><?= h($albumPhoto->modified) ?></td>
         </tr>
     </table>
+    <div class="row">
+        <h4><?= __('Description') ?></h4>
+        <?= $this->Text->autoParagraph(h($albumPhoto->description)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Lat') ?></h4>
+        <?= $this->Text->autoParagraph(h($albumPhoto->lat)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Lng') ?></h4>
+        <?= $this->Text->autoParagraph(h($albumPhoto->lng)); ?>
+    </div>
 </div>

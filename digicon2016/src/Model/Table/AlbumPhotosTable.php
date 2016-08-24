@@ -58,8 +58,17 @@ class AlbumPhotosTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->allowEmpty('description');
+
+        $validator
             ->dateTime('shooted')
             ->allowEmpty('shooted');
+
+        $validator
+            ->allowEmpty('lat');
+
+        $validator
+            ->allowEmpty('lng');
 
         return $validator;
     }

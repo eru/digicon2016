@@ -31,6 +31,10 @@
             <td><?= h($album->modified) ?></td>
         </tr>
     </table>
+    <div class="row">
+        <h4><?= __('Name') ?></h4>
+        <?= $this->Text->autoParagraph(h($album->name)); ?>
+    </div>
     <div class="related">
         <h4><?= __('Related Album Photos') ?></h4>
         <?php if (!empty($album->album_photos)): ?>
@@ -38,7 +42,10 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Album Id') ?></th>
+                <th><?= __('Description') ?></th>
                 <th><?= __('Shooted') ?></th>
+                <th><?= __('Lat') ?></th>
+                <th><?= __('Lng') ?></th>
                 <th><?= __('Created') ?></th>
                 <th><?= __('Modified') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
@@ -47,7 +54,10 @@
             <tr>
                 <td><?= h($albumPhotos->id) ?></td>
                 <td><?= h($albumPhotos->album_id) ?></td>
+                <td><?= h($albumPhotos->description) ?></td>
                 <td><?= h($albumPhotos->shooted) ?></td>
+                <td><?= h($albumPhotos->lat) ?></td>
+                <td><?= h($albumPhotos->lng) ?></td>
                 <td><?= h($albumPhotos->created) ?></td>
                 <td><?= h($albumPhotos->modified) ?></td>
                 <td class="actions">

@@ -8,7 +8,10 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $album_id
+ * @property string $description
  * @property \Cake\I18n\Time $shooted
+ * @property string $lat
+ * @property string $lng
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *

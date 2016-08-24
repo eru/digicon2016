@@ -61,6 +61,9 @@ class AlbumsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
+        $validator
+            ->allowEmpty('name');
+
         return $validator;
     }
 

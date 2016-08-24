@@ -12,7 +12,10 @@
         <legend><?= __('Add Album Photo') ?></legend>
         <?php
             echo $this->Form->input('album_id', ['options' => $albums, 'empty' => true]);
+            echo $this->Form->input('description');
             echo $this->Form->input('shooted', ['empty' => true]);
+            echo $this->Form->input('lat');
+            echo $this->Form->input('lng');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
