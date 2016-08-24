@@ -74,28 +74,42 @@ class AlbumsController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
-        $album = $this->Albums->get($id, [
-            'contain' => []
+        $album = null;
+        $albums = $this->Albums->find('all', [
+            'conditions' => [
+                'user_id' => $this->Auth->user('id'),
+            ],
         ]);
-        var_dump($album);exit;
-        if (empty($album)) {
-            echo "hoge";exit;
+        $albums_select = [];
+        foreach ($albums as $album) {
+            $albums_select[$album->id] = $album->name;
         }
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $album = $this->Albums->patchEntity($album, $this->request->data);
-            if ($this->Albums->save($album)) {
+
+        if ($this->request->is(['post'])) {
+            if (!empty($this->request->data('id'))) {
+                if (!in_array($this->request->data('id'), array_keys($albums_select))) {
+                    $this->Flash->error(__('The album id could not be edited.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                $album = $this->Albums->get($this->request->data('id'));
+            } else {
+                $album = $this->Albums->newEntity();
+                $album->set('user_id', $this->Auth->user('id'));
+            }
+
+            $album = $this->Albums->patchEntity($album, $this->request->data, ['associated' => 'AlbumPhotos']);
+            if ($result = $this->Albums->save($album)) {
                 $this->Flash->success(__('The album has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $result->id]);
             } else {
                 $this->Flash->error(__('The album could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Albums->Users->find('list', ['limit' => 200]);
-        $this->set(compact('album', 'users'));
-        $this->set('_serialize', ['album']);
+
+        $this->set(compact('album', 'albums', 'albums_select'));
     }
 
     /**

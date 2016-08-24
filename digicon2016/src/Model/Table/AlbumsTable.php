@@ -59,12 +59,30 @@ class AlbumsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmpty('id');
 
         $validator
-            ->allowEmpty('name');
+            ->notEmpty('name', __('please input album name'));
+
+        $validator
+            ->add('photos', 'custom', [
+                'rule' => [$this, 'photos'],
+                'message' => __('画像を選択してください'),
+            ]);
 
         return $validator;
+    }
+
+    public function photos($value, $context)
+    {
+        foreach ($value as $photo) {
+            // Tips: とりあえずjpgだけ
+            if (!preg_match('/^image\/(jpeg)$/', $photo['type'])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

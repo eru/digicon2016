@@ -86,4 +86,52 @@ class AlbumPhotosTable extends Table
 
         return $rules;
     }
+
+    public function beforeSave($event, $entity, $options)
+    {
+        // 更新時はスルー
+        if (isset($entity['id'])) {
+            return ;
+        }
+
+        // Tips: とりあえずexif取れない時は日本の原点
+        $lat = '35.658055556';
+        $lng = '139.741111111';
+        $shooted = date('Y-m-d H:i:s');
+
+        $exif = @exif_read_data($entity->tmp_name);
+        if (!empty($exif)) {
+            // Tips: 北半球か南半球かは知らない。
+            if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLongitude'])) {
+                $lat = $this->__convertGPS($exif['GPSLatitude']);
+                $lng = $this->__convertGPS($exif['GPSLongitude']);
+            }
+
+            if (!empty($exif['DateTime'])) {
+                $shooted = date('Y-m-d H:i:s', strtotime($exif['DateTime']));
+            }
+        }
+        $entity->set('lat', $lat);
+        $entity->set('lng', $lng);
+        $entity->set('shooted', $shooted);
+    }
+
+    public function afterSave($event, $entity, $options)
+    {
+        // Tips: cd WWW_ROOT && mkdir album_photos && chmod 777 album_photos
+        move_uploaded_file($entity->tmp_name, WWW_ROOT . 'album_photos' . DS . $entity->id . '.jpg');
+    }
+
+    private function __convertGPS($position)
+    {
+        return $this->__convertGPSPosition($position[0])
+            + $this->__convertGPSPosition($position[1]) / 60
+            + $this->__convertGPSPosition($position[2]) / 3600;
+    }
+
+    private function __convertGPSPosition($str)
+    {
+        $params = explode('/', $str);
+        return isset($params[1]) ? $params[0] / $params[1] : $str;
+    }
 }
