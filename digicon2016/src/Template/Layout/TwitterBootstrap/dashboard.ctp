@@ -19,21 +19,16 @@ $this->start('tb_body_start');
                 <a class="navbar-brand" href="#"><?= Configure::read('App.title') ?></a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right visible-xs">
-                    <?= $this->fetch('tb_actions') ?>
-                </ul>
-                <!--
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-divider"></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
-                </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
-                -->
+                <?php if ($this->request->session()->read('Auth')) : ?>
+                <div class="nav navbar-nav navbar-right">
+                    <?= $this->Html->link($this->request->session()->read('Auth.User.username') . 'さん', ['controller' => 'Albums', 'action' => 'index'], ['class' => 'navbar-brand']); ?>
+                </div>
+                <?php else : ?>
+                <div class="nav navbar-form navbar-right">
+                    <?= $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login'], ['class' => 'btn btn-success']); ?>
+                    <?= $this->Html->link(__('Signin'), ['controller' => 'Users', 'action' => 'add'], ['class' => 'btn btn-primary']); ?>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

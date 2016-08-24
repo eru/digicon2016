@@ -213,3 +213,5 @@ if (Configure::read('debug')) {
 Plugin::load('Migrations');
 
 Plugin::load('BootstrapUI');
+
+Configure::write('App.title', '思い出アルバム');
