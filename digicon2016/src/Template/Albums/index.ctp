@@ -8,7 +8,7 @@ $this->start('tb_actions');
       <ul>
       <?php foreach ($albums as $album): ?>
         <li>
-          <?= $this->Html->link(__($album->name), ['action' => 'view', $album->id]); ?></li>
+          <?= $this->Html->link(h($album->name), ['action' => 'view', $album->id]); ?></li>
         </li>
       <?php endforeach; ?>
       </ul>

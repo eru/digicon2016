@@ -18,13 +18,13 @@ class AlbumsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $albums = $this->paginate($this->Albums);
+        $albums = $this->Albums->find('all', [
+            'conditions' => [
+                'user_id' => $this->Auth->user('id'),
+            ],
+        ]);
 
         $this->set(compact('albums'));
-        $this->set('_serialize', ['albums']);
     }
 
     /**
@@ -79,6 +79,10 @@ class AlbumsController extends AppController
         $album = $this->Albums->get($id, [
             'contain' => []
         ]);
+        var_dump($album);exit;
+        if (empty($album)) {
+            echo "hoge";exit;
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $album = $this->Albums->patchEntity($album, $this->request->data);
             if ($this->Albums->save($album)) {

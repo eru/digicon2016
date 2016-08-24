@@ -23,17 +23,6 @@ class UsersController extends AppController
         $this->Auth->allow(['add', 'logout']);
     }
 
-    public function index()
-    {
-        $this->set('users', $this->Users->find('all'));
-    }
-
-    public function view($id)
-    {
-        $user = $this->Users->get($id);
-        $this->set(compact('user'));
-    }
-
     public function add()
     {
         $user = $this->Users->newEntity();
