@@ -43,6 +43,17 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'Albums',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'display',
+                'home'
+            ]
+        ]);
     }
 
     /**
@@ -58,5 +69,16 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    /**
+     * Before filter callback.
+     *
+     * @param \Cake\Event\Event $event The beforeFilter event.
+     * @return void
+     */
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['index', 'view', 'display']);
     }
 }
