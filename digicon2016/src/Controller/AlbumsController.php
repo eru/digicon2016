@@ -39,9 +39,18 @@ class AlbumsController extends AppController
         $album = $this->Albums->get($id, [
             'contain' => ['Users', 'AlbumPhotos']
         ]);
+        if ($album->user_id != $this->Auth->user('id')) {
+            return $this->redirect(['action' => 'index']);
+        }
+        $photos = $album->album_photos;
 
-        $this->set('album', $album);
-        $this->set('_serialize', ['album']);
+        $albums = $this->Albums->find('all', [
+            'conditions' => [
+                'user_id' => $this->Auth->user('id'),
+            ],
+        ]);
+
+        $this->set(compact('album', 'photos', 'albums'));
     }
 
     /**
