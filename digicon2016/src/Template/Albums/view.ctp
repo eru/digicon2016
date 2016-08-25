@@ -19,27 +19,23 @@ $this->start('tb_sidebar');
 $this->end();
 ?>
 
-<div id="map_canvas" style="width:80%; height:90%"></div>
-
+<div id="map_canvas" style="width: 80%; height: 509px;"></div>
 
 <?= $this->append('script'); ?>
-
-<script type="text/javascript"
-  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAKwHYrfiTrRlMhSNzKo47yuZsGRllSi2Q&sensor=false">
-</script>
-
-	
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/ja.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAKwHYrfiTrRlMhSNzKo47yuZsGRllSi2Q&sensor=false"></script>
 <script><!-- //
 var photos = <?= json_encode($photos, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
 
 $(function() {
-	initialize();
+  initialize();
 });
 
 function initialize() {
-
-  var latlng = new google.maps.LatLng(30.376276,140.476069);   
-  var myZoom = 16; 
+  $('#map_canvas').css('height', $(window).height() * 0.8 + 'px');
+  var latlng = new google.maps.LatLng(30.376276,140.476069);
+  var myZoom = 16;
   var opts = {
     zoom: 10,
     center: latlng,
@@ -48,7 +44,6 @@ function initialize() {
   };
 
   var map = new google.maps.Map(document.getElementById("map_canvas"), opts);
-
 
   var latlng2;
   var lat, lng;
@@ -59,37 +54,36 @@ function initialize() {
 
   for (var i=0 ; i< photos.length; i++){
     photo = photos[i];
-  
+
     lat = Number(photo.lat);
     lng = Number(photo.lng);
     latlng2 = new google.maps.LatLng(lat,lng);
 
     iwopts = {
-  		position: latlng2,
-　　　　　　　　maxWidth: 150,
-content: photo.shooted + " " + photo.description + '<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Mito-stn.JPG/250px-Mito-stn.JPG" rel="lightbox"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Mito-stn.JPG/250px-Mito-stn.JPG" width=100,height=100 /></a>'
-  		};
+      position: latlng2,
+      maxWidth: 150,
+      content: '<p>' + moment(photo.shooted).format('Y[年]M[月]D[日] H[時]m[分]s[秒]') + '</p>' + '<p><img src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
+    };
 
     infowindow = new google.maps.InfoWindow(iwopts);
-
     infowindow.open(map);
 
     if (lat < south){south = lat;}
     if (lat > north){north = lat;}
     if (lng < west){west = lng;}
     if (lng > east){east = lng;}
- 
+
   }
 
-  
+
   var ll_center = new google.maps.LatLng((south+north)/2,(west+east)/2);
   map.setCenter(ll_center);
 
   var ll_sw = new google.maps.LatLng(south,west);
   var ll_ne = new google.maps.LatLng(north,east);
   var latLngBounds = new google.maps.LatLngBounds(ll_sw, ll_ne);
-  map.fitBounds(latLngBounds); 
+  map.fitBounds(latLngBounds);
 }
-  
+
 // --></script>
 <?= $this->end(); ?>
