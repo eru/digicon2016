@@ -204,7 +204,7 @@ msgstr "アルバム名"
 
 #: Template/Albums/edit.ctp:27
 msgid "Select photos"
-msgstr "画像洗濯"
+msgstr "画像選択"
 
 #: Template/Layout/error.ctp:35
 msgid "Error"
