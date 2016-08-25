@@ -8,6 +8,7 @@ use Cake\Validation\Validator;
 use Monolog\Logger;
 use PHPExiftool\Reader;
 use PHPExiftool\Driver\Value\ValueInterface;
+use diversen\imageRotate;
 
 /**
  * AlbumPhotos Model
@@ -132,6 +133,15 @@ class AlbumPhotosTable extends Table
 
     public function afterSave($event, $entity, $options)
     {
+        // 画像が存在しなければスルー
+        if (!isset($entity['tmp_name']) || !file_exists($entity->tmp_name)) {
+            return ;
+        }
+
+        // Fix rotation
+        $rotate = new imageRotate();
+        $rotate->fixOrientation($entity->tmp_name);
+
         // Tips: cd WWW_ROOT && mkdir album_photos && chmod 777 album_photos
         move_uploaded_file($entity->tmp_name, WWW_ROOT . 'album_photos' . DS . $entity->id . '.jpg');
     }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e91254863017e86642b1c08c7852ee23",
-    "content-hash": "6432bc45056626d5df405bec88fe4e7d",
+    "hash": "aaccca9520dea6fa457e2a59ac9b7b88",
+    "content-hash": "d8b1c32855ced4d2aabbe6626476ca81",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -343,6 +343,53 @@
             ],
             "description": "A composer installer for CakePHP 3.0+ plugins.",
             "time": "2016-04-28 03:01:34"
+        },
+        {
+            "name": "diversen/image-auto-rotate",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/diversen/image-auto-rotate.git",
+                "reference": "3ad5982408fc8d1028032f4069915740f820580b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/diversen/image-auto-rotate/zipball/3ad5982408fc8d1028032f4069915740f820580b",
+                "reference": "3ad5982408fc8d1028032f4069915740f820580b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "diversen\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dennis Iversen",
+                    "email": "dennis.iversen@gmail.com"
+                }
+            ],
+            "description": "Auto rotate image to correct position from exif",
+            "homepage": "https://github.com/diversen/image-auto-rotate",
+            "keywords": [
+                "gd",
+                "image",
+                "rotate"
+            ],
+            "time": "2016-06-13 09:38:21"
         },
         {
             "name": "doctrine/cache",
