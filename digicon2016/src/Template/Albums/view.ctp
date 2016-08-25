@@ -50,12 +50,16 @@ $(function() {
 });
 
 function setDescription(id) {
+  var completeSetDescription = function (id) {
+    alert('更新しました');
+    $('p[data-id="' + id + '"]').text($('input[data-id="' + id + '"]').val());
+  };
   $.post('/albumPhotos/edit/' + id, {description: $('input[data-id="' + id + '"]').val()})
   .done(function() {
-    alert('更新しました');
+    completeSetDescription(id);
   })
   .fail(function() {
-    alert('更新しました');
+    completeSetDescription(id);
   });
 }
 
@@ -93,7 +97,7 @@ function initialize() {
     iwopts = {
       position: latlng2,
       maxWidth: 150,
-      content: '<p>' + moment(photo.shooted).format('Y-MM-DD HH:mm') + '</p>' + '<p><img onClick="window.parent.clickPhoto(' + photo.id + ');" src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
+      content: '<p>' + moment(photo.shooted).format('Y-MM-DD HH:mm') + '</p>' + '<p><img onClick="clickPhoto(' + photo.id + ');" src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p data-id="' + photo.id + '">' + photo.description + '</p>') : '')
     };
 
     infowindow = new google.maps.InfoWindow(iwopts);
@@ -105,7 +109,6 @@ function initialize() {
     if (lng > east){east = lng;}
 
   }
-
 
   var ll_center = new google.maps.LatLng((south+north)/2,(west+east)/2);
   map.setCenter(ll_center);
