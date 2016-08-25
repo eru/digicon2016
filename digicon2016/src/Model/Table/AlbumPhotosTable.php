@@ -5,6 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Monolog\Logger;
+use PHPExiftool\Reader;
+use PHPExiftool\Driver\Value\ValueInterface;
 
 /**
  * AlbumPhotos Model
@@ -94,23 +97,34 @@ class AlbumPhotosTable extends Table
             return ;
         }
 
-        // Tips: とりあえずexif取れない時は日本の原点
-        $lat = '35.658055556';
-        $lng = '139.741111111';
-        $shooted = date('Y-m-d H:i:s');
+        $lat = $lng = $shooted = null;
+        $logger = new Logger('exiftool');
+        $reader = Reader::create($logger);
+        $metadatas = $reader->files($entity->tmp_name)->first();
 
-        $exif = @exif_read_data($entity->tmp_name);
-        if (!empty($exif)) {
-            // Tips: 北半球か南半球かは知らない。
-            if (!empty($exif['GPSLatitude']) && !empty($exif['GPSLongitude'])) {
-                $lat = $this->__convertGPS($exif['GPSLatitude']);
-                $lng = $this->__convertGPS($exif['GPSLongitude']);
+        foreach ($metadatas as $metadata) {
+            if ($metadata->getTag() == 'GPS:GPSLatitude') {
+                $lat = $metadata->getValue()->asString();
             }
-
-            if (!empty($exif['DateTime'])) {
-                $shooted = date('Y-m-d H:i:s', strtotime($exif['DateTime']));
+            if ($metadata->getTag() == 'GPS:GPSLongitude') {
+                $lng = $metadata->getValue()->asString();
+            }
+            if ($metadata->getTag() == 'ExifIFD:DateTimeOriginal') {
+                $shooted = date('Y-m-d H:i:s', strtotime($metadata->getValue()->asString()));
             }
         }
+
+        if (empty($lat) || empty($lng)) {
+            // Tips: とりあえずexif取れない時は日本の原点
+            $lat = '35.658055556';
+            $lng = '139.741111111';
+        }
+
+        if (empty($shooted)) {
+            // Tips: とりあえずexif取れない時は現在時刻
+            $shooted = date('Y-m-d H:i:s');
+        }
+
         $entity->set('lat', $lat);
         $entity->set('lng', $lng);
         $entity->set('shooted', $shooted);
