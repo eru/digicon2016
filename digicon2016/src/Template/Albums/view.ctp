@@ -62,7 +62,7 @@ function initialize() {
     iwopts = {
       position: latlng2,
       maxWidth: 150,
-      content: '<p>' + moment(photo.shooted).format('Y[年]M[月]D[日] H[時]m[分]s[秒]') + '</p>' + '<p><img src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
+      content: '<p>' + moment(photo.shooted).format('Y-MM-DD HH:mm') + '</p>' + '<p><img src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
     };
 
     infowindow = new google.maps.InfoWindow(iwopts);
