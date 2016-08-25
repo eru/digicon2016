@@ -1,0 +1,227 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2016-08-25 05:17+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/AlbumPhotosController.php:58
+msgid "The album photo has been saved."
+msgstr "アルバムの画像を保存しました。"
+
+#: Controller/AlbumPhotosController.php:62
+msgid "The album photo could not be saved. Please, try again."
+msgstr "アルバムの画像の保存に失敗しました。再度試して下さい。"
+
+#: Controller/AlbumPhotosController.php:109
+msgid "The album photo has been deleted."
+msgstr "アルバムの画像を削除しました。"
+
+#: Controller/AlbumPhotosController.php:111
+msgid "The album photo could not be deleted. Please, try again."
+msgstr "アルバムの画像の削除に失敗しました。再度試して下さい。"
+
+#: Controller/AlbumsController.php:67;113
+msgid "The album has been saved."
+msgstr "アルバムの保存に成功しました。"
+
+#: Controller/AlbumsController.php:71;117
+msgid "The album could not be saved. Please, try again."
+msgstr "アルバムの保存に失敗しました。再度試して下さい。"
+
+#: Controller/AlbumsController.php:102
+msgid "The album id could not be edited."
+msgstr "アルバムの編集に失敗しました。"
+
+#: Controller/AlbumsController.php:136
+msgid "The album has been deleted."
+msgstr "アルバムの削除に成功しました。"
+
+#: Controller/AlbumsController.php:138
+msgid "The album could not be deleted. Please, try again."
+msgstr "アルバムの削除に失敗しました。再度試して下さい。"
+
+#: Controller/UsersController.php:32
+msgid "The user has been saved."
+msgstr "ユーザの作成に成功しました。"
+
+#: Controller/UsersController.php:35
+msgid "Unable to add the user."
+msgstr "ユーザの作成に失敗しました。"
+
+#: Controller/UsersController.php:48
+msgid "Invalid username or password, try again"
+msgstr "ユーザ名かパスワードが違います。再度試して下さい。"
+
+#: Model/Table/AlbumsTable.php:65
+msgid "please input album name"
+msgstr "アルバム名を入力して下さい。"
+
+#: Model/Table/AlbumsTable.php:70
+msgid "画像を選択してください"
+msgstr ""
+
+#: Template/AlbumPhotos/add.ctp:6;15
+#: Template/AlbumPhotos/edit.ctp:14;31
+#: Template/AlbumPhotos/view.ctp:9;21
+msgid "List Album Photos"
+msgstr "アルバム画像"
+
+#: Template/AlbumPhotos/add.ctp:7;16
+#: Template/AlbumPhotos/edit.ctp:15;32
+#: Template/AlbumPhotos/index.ctp:7
+#: Template/AlbumPhotos/view.ctp:11;23
+msgid "List Albums"
+msgstr "アルバム"
+
+#: Template/AlbumPhotos/add.ctp:8;17
+#: Template/AlbumPhotos/edit.ctp:16;33
+#: Template/AlbumPhotos/index.ctp:8
+#: Template/AlbumPhotos/view.ctp:12;24
+msgid "New Album"
+msgstr "アルバム新規作成"
+
+#: Template/AlbumPhotos/add.ctp:24
+msgid "Add {0}"
+msgstr "{0}を追加しました。"
+
+#: Template/AlbumPhotos/add.ctp:33
+#: Template/Users/add.ctp:6;12
+msgid "Add"
+msgstr "追加"
+
+#: Template/AlbumPhotos/edit.ctp:8;25
+#: Template/AlbumPhotos/index.ctp:36
+msgid "Delete"
+msgstr "削除"
+
+#: Template/AlbumPhotos/edit.ctp:10;27
+#: Template/AlbumPhotos/index.ctp:36
+#: Template/AlbumPhotos/view.ctp:8;20
+msgid "Are you sure you want to delete # {0}?"
+msgstr "{0}を削除してもよろしいですか？"
+
+#: Template/AlbumPhotos/edit.ctp:40
+msgid "Edit {0}"
+msgstr "{0}を編集"
+
+#: Template/AlbumPhotos/edit.ctp:49
+#: Template/Albums/edit.ctp:29
+msgid "Save"
+msgstr "保存"
+
+#: Template/AlbumPhotos/index.ctp:6
+#: Template/AlbumPhotos/view.ctp:10;22
+msgid "New Album Photo"
+msgstr "アルバム画像新規作成"
+
+#: Template/AlbumPhotos/index.ctp:20
+msgid "Actions"
+msgstr "操作一覧"
+
+#: Template/AlbumPhotos/index.ctp:34
+msgid "View"
+msgstr "閲覧"
+
+#: Template/AlbumPhotos/index.ctp:35
+msgid "Edit"
+msgstr "編集"
+
+#: Template/AlbumPhotos/index.ctp:44
+msgid "previous"
+msgstr "前へ"
+
+#: Template/AlbumPhotos/index.ctp:46
+msgid "next"
+msgstr "次へ"
+
+#: Template/AlbumPhotos/view.ctp:7;19
+msgid "Edit Album Photo"
+msgstr "アルバム画像を編集"
+
+#: Template/AlbumPhotos/view.ctp:8;20
+msgid "Delete Album Photo"
+msgstr "アルバム画像を削除"
+
+#: Template/AlbumPhotos/view.ctp:36
+msgid "Album"
+msgstr "アルバム"
+
+#: Template/AlbumPhotos/view.ctp:40
+msgid "Id"
+msgstr "ID"
+
+#: Template/AlbumPhotos/view.ctp:44
+msgid "Shooted"
+msgstr "撮影日時"
+
+#: Template/AlbumPhotos/view.ctp:48
+msgid "Created"
+msgstr "作成日時"
+
+#: Template/AlbumPhotos/view.ctp:52
+msgid "Modified"
+msgstr "更新日時"
+
+#: Template/AlbumPhotos/view.ctp:56
+msgid "Description"
+msgstr "一言"
+
+#: Template/AlbumPhotos/view.ctp:60
+msgid "Lat"
+msgstr "緯度"
+
+#: Template/AlbumPhotos/view.ctp:64
+msgid "Lng"
+msgstr "経度"
+
+#: Template/Albums/edit.ctp:7
+#: Template/Albums/index.ctp:6
+#: Template/Albums/view.ctp:7
+msgid "Edit Album"
+msgstr "アルバムを編集"
+
+#: Template/Albums/edit.ctp:24
+msgid "Albums Edit"
+msgstr "アルバムの編集"
+
+#: Template/Albums/edit.ctp:25
+msgid "New album"
+msgstr "アルバム新規作成"
+
+#: Template/Albums/edit.ctp:26
+msgid "Album name"
+msgstr "アルバム名"
+
+#: Template/Albums/edit.ctp:27
+msgid "Select photos"
+msgstr "画像洗濯"
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr "エラー"
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr "戻る"
+
+#: Template/Layout/TwitterBootstrap/dashboard.ctp:28
+#: Template/Layout/TwitterBootstrap/landing.ctp:28
+#: Template/Users/login.ctp:6;12
+msgid "Login"
+msgstr "ログイン"
+
+#: Template/Layout/TwitterBootstrap/dashboard.ctp:29
+#: Template/Layout/TwitterBootstrap/landing.ctp:29
+msgid "Signin"
+msgstr "新規登録"
+
