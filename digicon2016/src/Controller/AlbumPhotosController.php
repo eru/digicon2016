@@ -82,11 +82,11 @@ class AlbumPhotosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $albumPhoto = $this->AlbumPhotos->patchEntity($albumPhoto, $this->request->data);
             if ($this->AlbumPhotos->save($albumPhoto)) {
-                $this->Flash->success(__('The album photo has been saved.'));
+                //$this->Flash->success(__('The album photo has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The album photo could not be saved. Please, try again.'));
+                //$this->Flash->error(__('The album photo could not be saved. Please, try again.'));
             }
         }
         $albums = $this->AlbumPhotos->Albums->find('list', ['limit' => 200]);

@@ -20,17 +20,48 @@ $this->end();
 ?>
 
 <div id="map_canvas" style="width: 80%; height: 509px;"></div>
+<div class="row" style="display: none;">
+   <?php foreach ($photos as $photo) : ?>
+   <a href="/album_photos/<?= $photo->id; ?>.jpg" data-id="<?= $photo->id; ?>" data-toggle="lightbox" data-title="<?= date('Y-m-d H:i', strtotime($photo->shooted)); ?>" data-footer="<input class='form-control' type='text' value='<?= isset($photo['description']) ? $photo->description : ''; ?>' data-id='<?= $photo->id; ?>'><br><input class='form-control btn btn-success' type='button' onClick='setDescription(<?= $photo->id; ?>);' value='登録'>">
+      <img src="/album_photos/<?= $photo->id; ?>.jpg" class="img-responsive">
+   </a>
+   <?php endforeach; ?>
+</div>
+
+<?php
+   $this->prepend('css', $this->Html->css(['ekko-lightbox/ekko-lightbox.min']));
+?>
 
 <?= $this->append('script'); ?>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/locale/ja.js"></script>
+<script type="text/javascript" src="/js/ekko-lightbox/ekko-lightbox.min.js"></script>
 <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAKwHYrfiTrRlMhSNzKo47yuZsGRllSi2Q&sensor=false"></script>
 <script><!-- //
 var photos = <?= json_encode($photos, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
 
 $(function() {
   initialize();
+
+  $('*[data-toggle="lightbox"]').on('click', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
 });
+
+function setDescription(id) {
+  $.post('/albumPhotos/edit/' + id, {description: $('input[data-id="' + id + '"]').val()})
+  .done(function() {
+    alert('更新しました');
+  })
+  .fail(function() {
+    alert('更新しました');
+  });
+}
+
+function clickPhoto(id) {
+  $('a[data-id="' + id + '"]').ekkoLightbox();
+}
 
 function initialize() {
   $('#map_canvas').css('height', $(window).height() * 0.8 + 'px');
@@ -62,7 +93,7 @@ function initialize() {
     iwopts = {
       position: latlng2,
       maxWidth: 150,
-      content: '<p>' + moment(photo.shooted).format('Y-MM-DD HH:mm') + '</p>' + '<p><img src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
+      content: '<p>' + moment(photo.shooted).format('Y-MM-DD HH:mm') + '</p>' + '<p><img onClick="window.parent.clickPhoto(' + photo.id + ');" src="/album_photos/' + photo.id + '.jpg" style="max-width: 100px; max-height: 100px;" /></p>' + (photo.description ? ('<p>' + photo.description + '</p>') : '')
     };
 
     infowindow = new google.maps.InfoWindow(iwopts);
